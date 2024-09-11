@@ -99,7 +99,7 @@ void	cd_error(char **str[2])
 
 	dir = NULL;
 	if (str[0][2] != NULL)
-		return(mini_perror(str[0], MANY_ARG, NULL, 1));
+		mini_perror(str[0], MANY_ARG, NULL, 1);
 	if (str[0][1])
 		dir = opendir(str[0][1]);
 	if (!str[0][1] && str[1][0] && !str[1][0][0])

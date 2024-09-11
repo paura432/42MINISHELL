@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: joseph <joseph@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 13:59:02 by jpajuelo          #+#    #+#             */
-/*   Updated: 2024/09/10 23:30:13 by marvin           ###   ########.fr       */
+/*   Updated: 2024/09/11 14:04:05 by joseph           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -167,7 +167,9 @@ int	mini_export(t_prompt *prompt)
 
 	argc = ((t_mini *)prompt->cmds->content)->full_cmd;
 	if(!export_wrong(argc))
+	{
 		return(0);
+	}
 	// Si no hay argumentos, lista todas las variables de entorno
 	if (ft_matrixlen(argc) == 1)
 	{
@@ -191,9 +193,7 @@ int	mini_export(t_prompt *prompt)
 			{
 				// Separar la clave y el valor
 				key = ft_substr(argc[ij[0]], 0, equal_sign - argc[ij[0]]);
-				printf("%s",key);
 				value = ft_strdup(equal_sign + 1);
-				printf("%s",value);
 			}
 			else
 			{
@@ -206,12 +206,10 @@ int	mini_export(t_prompt *prompt)
 
 			// Buscar la variable en el entorno
 			pos = var_in_envp(key, prompt->envp, ij);
-			printf("%i",pos);
 			if (pos == 1)
 			{
 				// Reemplazar el valor existente
 				pos = where_envp(key, prompt->envp);
-				printf("%i",pos);
 				free(prompt->envp[pos]);
 				prompt->envp[pos] = ft_strjoin(key, "=");
 				prompt->envp[pos] = ft_strjoin(prompt->envp[pos], value);
@@ -247,10 +245,16 @@ int	export_wrong(char **argc)
 	//revisar con pipe
 	// if (ft_strncmp(argc[x], "export", 6))
 	// 	x++;
-	if (argc[1][0] == '-' && argc[1][1] != NULL)
-		return (mini_perror(argc, INV_OPTION, NULL, 0), 0);
+	if (ft_matrixlen(argc) >= 2 && argc[1][0] == '-')
+	{
+		mini_perror(argc, INV_OPTION, NULL, 0), 0;
+		return 0;	
+	}
 	if (!if_alfnum_(argc, x))
-		return (mini_perror(argc, NOT_VAL_IDENT, NULL, 0), 0);
+	{
+		mini_perror(argc, NOT_VAL_IDENT, NULL, 0);
+		return 0;	
+	}
 	return (1);
 	//falta free
 }
@@ -261,14 +265,14 @@ int if_alfnum_(char **cmds, int x)
 	int j;
 
 	i = x;
-	while (cmds[i++] != 0)
+	while (!cmds[i++])
 	{
 		j = -1;
-		while (cmds[i][++j] != 0)
+		while (!cmds[i][++j])
 		{
 			if (!((cmds[i][j] >= 'a' && cmds[i][j] <= 'z') || (cmds[i][j] >= 'A' &&
 				cmds[i][j] <= 'Z') || (cmds[i][j] >= '0' && cmds[i][j] <= '9') ||
-				cmds[i][j] == '_') || (cmds[i][0] >= '0' && cmds[i][0] <= '9'))
+				cmds[i][j] == '_' || cmds[i][j] == '=') || (cmds[i][0] >= '0' && cmds[i][0] <= '9'))
 				return (0);
 		}
 	}
