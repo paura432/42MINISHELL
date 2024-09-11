@@ -119,6 +119,6 @@ int	ft_putchar_fd_2(char c, int fd);
 
 //pablo
 int	export_wrong(char **ag);
-int if_alfnum_(char **cmds, int x);
+int if_alfnum_(char **cmds);
 
 #endif

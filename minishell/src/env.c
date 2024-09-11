@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: joseph <joseph@student.42.fr>              +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 13:59:02 by jpajuelo          #+#    #+#             */
-/*   Updated: 2024/09/11 14:04:05 by joseph           ###   ########.fr       */
+/*   Updated: 2024/09/11 23:23:00 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -240,8 +240,6 @@ int	mini_export(t_prompt *prompt)
 
 int	export_wrong(char **argc)
 {
-	int x;
-	x = 0;
 	//revisar con pipe
 	// if (ft_strncmp(argc[x], "export", 6))
 	// 	x++;
@@ -250,7 +248,7 @@ int	export_wrong(char **argc)
 		mini_perror(argc, INV_OPTION, NULL, 0), 0;
 		return 0;	
 	}
-	if (!if_alfnum_(argc, x))
+	else if (!if_alfnum_(argc, x))
 	{
 		mini_perror(argc, NOT_VAL_IDENT, NULL, 0);
 		return 0;	
@@ -259,16 +257,16 @@ int	export_wrong(char **argc)
 	//falta free
 }
 
-int if_alfnum_(char **cmds, int x)
+int if_alfnum_(char **cmds)
 {
 	int i;
 	int j;
 
-	i = x;
-	while (!cmds[i++])
+	i = -1;
+	while (cmds[++i])
 	{
 		j = -1;
-		while (!cmds[i][++j])
+		while (cmds[i][++j])
 		{
 			if (!((cmds[i][j] >= 'a' && cmds[i][j] <= 'z') || (cmds[i][j] >= 'A' &&
 				cmds[i][j] <= 'Z') || (cmds[i][j] >= '0' && cmds[i][j] <= '9') ||
