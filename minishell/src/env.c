@@ -156,6 +156,31 @@ void	show_export_env(char *str)
 	write(1,"\n",1);
 }
 
+char **ft_comprobar_prompt(t_prompt *prompt)
+{
+	t_list *puntero;
+	int i;
+
+	puntero = (t_list *)prompt->cmds;
+	while (puntero->next)
+	{
+		if (!ft_strncmp(((t_mini*)puntero->content)->full_cmd[0],"export",6))
+		{
+			//printf("entro %s\n",((t_mini*)puntero->content)->full_cmd[0]);
+			return ((t_mini*)puntero->content)->full_cmd;
+		}
+		//printf("no entro %s\n",((t_mini*)puntero->content)->full_cmd[0]);
+		puntero = puntero->next;
+	}
+	if (!ft_strncmp(((t_mini*)puntero->content)->full_cmd[0],"export",6))
+	{
+			//printf("entro %s\n",((t_mini*)puntero->content)->full_cmd[0]);
+		return ((t_mini*)puntero->content)->full_cmd;
+	}
+	return NULL;
+
+}
+
 int	mini_export(t_prompt *prompt)
 {
 	int	ij[2];
@@ -165,7 +190,15 @@ int	mini_export(t_prompt *prompt)
 	char	*value;
 	char	*new_var;
 
-	argc = ((t_mini *)prompt->cmds->content)->full_cmd;
+	//argc = ((t_mini *)prompt->cmds->content)->full_cmd;
+	argc = ft_comprobar_prompt(prompt);
+	//ft_comprobar_prompt(prompt);
+	/**int t = 0;
+	while(argc[t])
+	{
+		printf("dentro %s\n", argc[t]);
+		t++;
+	}*/
 	if(!export_wrong(argc))
 	{
 		return(0);
@@ -211,8 +244,15 @@ int	mini_export(t_prompt *prompt)
 				// Reemplazar el valor existente
 				pos = where_envp(key, prompt->envp);
 				free(prompt->envp[pos]);
-				prompt->envp[pos] = ft_strjoin(key, "=");
-				prompt->envp[pos] = ft_strjoin(prompt->envp[pos], value);
+				if (!value)
+				{
+					prompt->envp[pos] = ft_strdup(key);
+				}
+				else
+				{
+					prompt->envp[pos] = ft_strjoin(key, "=");
+					prompt->envp[pos] = ft_strjoin(prompt->envp[pos], value);
+				}
 			}
 			else if (!pos)
 			{
@@ -248,7 +288,7 @@ int	export_wrong(char **argc)
 		mini_perror(argc, INV_OPTION, NULL, 0), 0;
 		return 0;	
 	}
-	else if (!if_alfnum_(argc, x))
+	else if (!if_alfnum_(argc))
 	{
 		mini_perror(argc, NOT_VAL_IDENT, NULL, 0);
 		return 0;	

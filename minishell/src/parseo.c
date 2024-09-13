@@ -51,6 +51,14 @@ static	void	*parse_args(char **argc, t_prompt *prompt)
 	if (!prompt->cmds)
 		return (prompt);
 	//buscamos la posicion del ultimo nodo
+	/**int t = 0;
+	t_mini *hola = (t_mini *)prompt->cmds->next->content;
+	while (hola->full_cmd[t])
+	{
+		printf("%s estos son los argumentos\n", hola->full_cmd[t]);
+		t++;
+	}
+*/
 	i = ft_lstsize(prompt->cmds);
 	g_status = builtin(prompt, prompt->cmds, &is_exit, 0);
 	while (i-- > 0)

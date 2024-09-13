@@ -11,6 +11,7 @@ int	builtin(t_prompt *prompt, t_list *cmd, int *is_exit, int n)
 	//una vez ejecutada saltamos al siguiente nodo
 	while (cmd)
 	{
+		
 		a = ((t_mini *)cmd->content)->full_cmd;
 		n = 0;
 		if (a)

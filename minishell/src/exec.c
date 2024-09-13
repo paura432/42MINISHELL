@@ -4,6 +4,21 @@
 
 extern int g_status;
 
+static int comprobacion_cmd(t_mini *mini, char *env, int l)
+{
+	int i;
+	i = 0;
+	if (ft_matrixlen(mini->full_cmd) >= 2)
+	{
+		mini_perror(mini->full_cmd, 17, NULL, 1);
+		return 1;
+	}
+	else
+	{
+		return (ft_strncmp(*mini->full_cmd, env, l));
+	}
+}
+
 void	child_builtin(t_prompt *prompt, t_mini *mini, int l, t_list *cmd)
 {
 	signal(SIGINT, SIG_DFL);
@@ -17,7 +32,7 @@ void	child_builtin(t_prompt *prompt, t_mini *mini, int l, t_list *cmd)
 			!ft_strncmp(*mini->full_cmd, "echo", l) && l == 4)
 			g_status = mini_echo(cmd);
 	else if (is_builtin(mini) && mini->full_cmd && \
-			!ft_strncmp(*mini->full_cmd, "env", l) && l == 3)
+			!comprobacion_cmd(mini, "env", l) && l == 3)
 	{
 		ft_putmatrix_fd(prompt->envp, 1, 1);
 		g_status = 0;
@@ -46,6 +61,8 @@ static	void	*child_redir(t_list *cmd, int fd[2])
 	close(fd[WRITE_END]);
 	return ("");
 }
+
+//cambio realizado sobre env -i en los procesos hijos
 
 void	*child_process(t_prompt *prompt, t_list *cmd, int fd[2])
 {

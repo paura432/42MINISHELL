@@ -13,6 +13,8 @@ void	*mini_perror(char **ag, int err_type, char *param, int err)
 		printf("minishell: %s: %s: No such file or directory:\n", ag[0], ag[1]);
 	else if (err_type == NPERM)
 		ft_putstr_fd("minishell: permission denied: ", 2);
+	else if (err_type == ENVF)
+		printf("minishell: %s %s: invalid flag \n", ag[0], ag[1]);
 	else if (err_type == NCMD)
 		ft_putstr_fd("minishell: command not found: ", 2);
 	else if (err_type == DUPERR)

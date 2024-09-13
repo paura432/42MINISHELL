@@ -93,5 +93,7 @@ char	**ft_cmdtrim(char const *s, char *set)
 	aux = ft_fill_array(aux, s, set, i);
 	//finalizamos la ultima parte
 	aux[nwords] = NULL;
+	//COMANDOS RECIBIDOS CORRECTAMENTE.
+
 	return (aux);
 }
