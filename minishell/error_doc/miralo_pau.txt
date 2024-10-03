@@ -1,0 +1,6 @@
+test40 NO
+test41 NO
+test 26,30,31,32,96,97,98 -> cambiar salida de export por 1
+test 28 -> mala ejecucion
+test 50 -> cambiar salida por 2
+test 64,65,66,76,77,78,79,80,104,105,106,108,119,127 -> segmention fault revizar doble free
