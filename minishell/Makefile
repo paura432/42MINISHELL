@@ -33,6 +33,7 @@ BIN_DIR = bin
 UTILS_DIR = minishell_utils
 LIBFT = libft/libft.a
 BIN = minishell
+TESTER = 
 NAME = $(BIN_DIR)/$(BIN)
 LIBFT_DIR = libft
 #verificacion del directorio exista y luego procedemos a tomar los .c
@@ -74,10 +75,11 @@ clean: | $(LIBFT_DIR)
 	@$(PRINTF) "$(CYAN)Cleaning up object files in $(NAME)...$(DEFAULT)\n"
 	@make clean -C libft
 	@$(RM) -r $(OBJ_DIR)
-
+#cambiar el rm -r bin/minishell al regresar el programa
 fclean: clean
-	@$(RM) -r $(BIN_DIR)
+	#@$(RM) -r $(BIN_DIR)
 	$(RM) $(LIBFT)
+	$(RM) -r bin/minishell
 	@$(PRINTF) "$(CYAN)Removed $(LIBFT)$(DEFAULT)\n"
 	@$(PRINTF) "$(CYAN)Removed $(NAME)$(DEFAULT)\n"
 
@@ -85,7 +87,7 @@ $(OBJ_DIR):
 	@mkdir -p $(OBJ_DIR)
 
 $(BIN_DIR):
-	@mkdir -p $(BIN_DIR)
+	#@mkdir -p $(BIN_DIR)
 
 re:	fclean
 	@make all
