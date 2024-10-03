@@ -46,7 +46,8 @@ enum e_mini_error
     NOT_DIR = 13,
     NOT_VAL_IDENT = 14,
     INV_OPTION = 15,
-    MANY_ARG = 16
+    MANY_ARG = 16,
+    ENVF = 17,
 };
 
 char	*mini_readline(t_prompt *prompt, char *str);
