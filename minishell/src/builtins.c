@@ -30,9 +30,12 @@ int	builtin(t_prompt *prompt, t_list *cmd, int *is_exit, int n)
 		{
 			signal(SIGINT, SIG_IGN);
 			signal(SIGQUIT, SIG_IGN);
+			//printf("\n en cmd a: %s\n", a[1]);
 			exec_cmd(prompt, cmd);
 		}
+		//printf("antes %s", (char *)cmd);
 		cmd = cmd->next;
+		//printf("despues %s", (char *)cmd);
 	}
 	return (g_status);
 }
@@ -117,6 +120,7 @@ int	mini_echo(t_list *cmd)
 	argv = node->full_cmd;
 	while (argv && argv[++i[0]])
 	{
+		//printf("es %s\n", argv[i[0]]);
 		if (!i[1] && !ft_strncmp(argv[i[0]], "-n", 2) && \
 			(ft_countchar(argv[i[0]], 'n') == \
 			(int)(ft_strlen(argv[i[0]]) - 1)))

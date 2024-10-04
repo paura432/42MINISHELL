@@ -20,6 +20,7 @@ static t_mini	*get_params(t_mini *node, char **a[2], int *i)
 {
 	if (a[0][*i])
 	{
+		//printf("entramos\n");
 		if (a[0][*i][0] == '>' && a[0][*i + 1] && a[0][*i + 1][0] == '>')
 			node = get_outfile2(node, a[1], i);
 		else if (a[0][*i][0] == '>')
@@ -68,6 +69,22 @@ static t_list	*stop_fill(t_list *cmds, char **args, char **temp)
 	return (NULL);
 }
 
+int ft_prub(char **args, int i)
+{
+	int j = i;
+	while (args[j])
+	{
+		//printf("\nentro %s\n",args[j]);
+		if (ft_strchr(args[j], '|'))
+		{
+			//printf("encontro");
+			return 1;
+		}
+		j++;
+	}
+	return 0;
+}
+
 t_list	*fill_nodes(char **args, int i)
 {
 	t_list	*cmds[2];
@@ -83,14 +100,19 @@ t_list	*fill_nodes(char **args, int i)
 		//en caso de comenzar con tuberia, respetar el orden de ejecucion pasando el nodo a la penultima posicion
 		if (i == 0 || (args[i][0] == '|' && args[i + 1] && args[i + 1][0]))
 		{
+			//printf("identifico el pipe: %s\n",args[i]);
 			i += args[i][0] == '|';
 			//posicionamos el nodo y creamos una instancia vacia en donde manejaremos los procesos por stdout y in
 			ft_lstadd_back(&cmds[0], ft_lstnew(mini_init()));
 			//reacomodamos el nodo
 			cmds[1] = ft_lstlast(cmds[0]);
+			
 		}
+		//printf("es aqui: %s\n",args[i]);
+		
 		temp[0] = args;
 		cmds[1]->content = get_params(cmds[1]->content, temp, &i);
+		//printf("\npaso final %i\n", i);
 		if (i < 0)
 			return (stop_fill(cmds[0], args, temp[1]));
 		if (!args[i])

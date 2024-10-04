@@ -20,6 +20,7 @@ static char	*get_substr_var(char *str, int i, t_prompt *prompt)
 	char	*path;
 	char	*var;
 
+	//printf("la principal %s\n",str);
 	//buscamos el delimitador pos $ y le sumamos una posicion en caso de encontrar otro $ o ?
 	pos = ft_strchars_i(&str[i], "|\"\'$?>< ") + (ft_strchr("$?", str[i]) != 0);
 	//si no encontramos algun delimetador tomamos la ultima posicion, que seria todo el prompot a ejecutar
@@ -38,10 +39,15 @@ static char	*get_substr_var(char *str, int i, t_prompt *prompt)
 	//de ser un ? pues mostramos el tipo de proceso actual en el que se encuentra -> 0,127,31,etc
 	else if (!var && str[i] == '?')
 		var = ft_itoa(g_status);
+	else if (!var)
+		var = ft_strdup("");
 	//establecemos el nuevo prompt y liberamos
+	//printf("estos son var: %s y aux: %s\n", var, aux);
 	path = ft_strjoin(aux, var);
+	//printf("este es la variable %s\n",path);
 	free(aux);
 	aux = ft_strjoin(path, &str[i + pos]);
+	//printf("\nla expandida %s", aux);
 	free(var);
 	free(path);
 	free(str);

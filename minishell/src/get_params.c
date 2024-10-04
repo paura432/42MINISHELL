@@ -6,13 +6,16 @@ extern int	g_status;
 int	get_fd(int oldfd, char *path, int flags[2])
 {
 	int	fd;
-
+	//printf("ruta: %s\n", path);
+	//printf("oldfd: %i\n", oldfd);
+	//printf("flags: %i\n", flags[0]);
+	//printf("flags: %i\n", flags[1]);
 	if (oldfd > 2)
 		close(oldfd);
 	if (!path)
 		return (-1);
 	if (access(path, F_OK) == -1 && !flags[0])
-		mini_perror(NULL, NDIR, path, 127);
+		mini_perror(NULL, NDIR, NULL, 127);
 	else if (!flags[0] && access(path, R_OK) == -1)
 		mini_perror(NULL, NPERM, path, 126);
 	else if (flags[0] && access(path, W_OK) == -1 && access(path, F_OK) == 0)
@@ -25,6 +28,7 @@ int	get_fd(int oldfd, char *path, int flags[2])
 		fd = open(path, O_RDONLY);
 	else
 		fd = oldfd;
+	//printf("ruta: %i\n", fd);
 	return (fd);
 }
 
@@ -41,7 +45,11 @@ t_mini	*get_outfile1(t_mini *node, char **args, int *i)
 		node->outfile = get_fd(node->outfile, args[*i], flags);
 	if (!args[*i] || node->outfile == -1)
 	{
-		*i = -1;
+		if (!ft_prub(args,*i))
+		{
+			*i = -1;
+			mini_perror(NULL,NDIR,NULL,1);
+		}
 		if (node->outfile != -1)
 		{
 			ft_putendl_fd(nl, 2);
@@ -62,11 +70,19 @@ t_mini	*get_outfile2(t_mini *node, char **args, int *i)
 	flags[1] = 1;
 	nl = "minishell: syntax error near unexpected token `newline'";
 	(*i)++;
+	//printf("get_outfile %d\n",*i);
 	if (args[++(*i)])
 		node->outfile = get_fd(node->outfile, args[*i], flags);
 	if (!args[*i] || node->outfile == -1)
 	{
-		*i = -1;
+		//printf("\nhola\n");
+		//printf("\ninicio : %s\n", args[*i]);
+		if (!ft_prub(args, *i))
+		{
+			*i = -1;
+			mini_perror(NULL,NDIR,NULL,1);
+		}
+		
 		if (node->outfile != -1)
 		{
 			ft_putendl_fd(nl, 2);
@@ -75,6 +91,7 @@ t_mini	*get_outfile2(t_mini *node, char **args, int *i)
 		else
 			g_status = 1;
 	}
+	//printf("\nentro? %i", node->outfile);
 	return (node);
 }
 

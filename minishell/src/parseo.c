@@ -36,7 +36,15 @@ static	char	**split_all(char **argc, t_prompt *prompt)
 		ft_matrix_replace_in(&argc, subsplit, i);
 		i += ft_matrixlen(subsplit) - 1;
 		ft_free_matrix(&subsplit);	
-	}
+		
+	}/*
+	int j = 0;
+	while (argc[j])
+	{
+		printf("es %s\n", argc[j]);
+		j++;
+	}*/
+	
 	return (argc);
 }
 
@@ -46,19 +54,22 @@ static	void	*parse_args(char **argc, t_prompt *prompt)
 	int i;
 
 	is_exit = 0;
+	//char **j = split_all(argc,prompt);
+	//printf("split: %s\n", j[0]);
 	//accedemos a la lista de nuestra estructura para trasladar los datos
 	prompt->cmds = fill_nodes(split_all(argc, prompt), -1);
 	if (!prompt->cmds)
 		return (prompt);
 	//buscamos la posicion del ultimo nodo
-	/**int t = 0;
-	t_mini *hola = (t_mini *)prompt->cmds->next->content;
+	 /*
+	int t = 0;
+	t_mini *hola = (t_mini *)prompt->cmds->content;
 	while (hola->full_cmd[t])
 	{
 		printf("%s estos son los argumentos\n", hola->full_cmd[t]);
 		t++;
-	}
-*/
+	}*/
+
 	i = ft_lstsize(prompt->cmds);
 	g_status = builtin(prompt, prompt->cmds, &is_exit, 0);
 	while (i-- > 0)

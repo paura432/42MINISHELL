@@ -117,6 +117,7 @@ char	*expand_vars(char *str, int i, int quotes[2], t_prompt *prompt);
 int	ft_putendl_fd_2(char *s, int fd);
 int	ft_putstr_fd_2(char *s, int fd);
 int	ft_putchar_fd_2(char c, int fd);
+int ft_prub(char **args, int i);
 
 //pablo
 int	export_wrong(char **ag);

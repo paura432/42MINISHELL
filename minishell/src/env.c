@@ -14,6 +14,7 @@
 //sencillo buscamos que exista y tomamos el contenido desde despues del "=" y si no existe retornamos null
 //con respecto a ft_strchr_i la unica modificacion realizada es que esta devuelve la posicion entera en donde se encuentra
 
+
 char	*mini_getenv(char *var, char **envp, int n)
 {
 	int i;
@@ -201,7 +202,7 @@ int	mini_export(t_prompt *prompt)
 	}*/
 	if(!export_wrong(argc))
 	{
-		return(0);
+		return(1);
 	}
 	// Si no hay argumentos, lista todas las variables de entorno
 	if (ft_matrixlen(argc) == 1)
@@ -285,12 +286,12 @@ int	export_wrong(char **argc)
 	// 	x++;
 	if (ft_matrixlen(argc) >= 2 && argc[1][0] == '-')
 	{
-		mini_perror(argc, INV_OPTION, NULL, 0), 0;
+		mini_perror(argc, INV_OPTION, NULL,  1);
 		return 0;	
 	}
 	else if (!if_alfnum_(argc))
 	{
-		mini_perror(argc, NOT_VAL_IDENT, NULL, 0);
+		mini_perror(argc, NOT_VAL_IDENT, NULL, 1);
 		return 0;	
 	}
 	return (1);

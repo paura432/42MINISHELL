@@ -10,13 +10,13 @@ void	*mini_perror(char **ag, int err_type, char *param, int err)
 	if (err_type == QUOTE)
 		ft_putstr_fd("minishell: error while looking for matching quote\n", 2);
 	else if (err_type == NDIR)
-		printf("minishell: %s: %s: No such file or directory:\n", ag[0], ag[1]);
+		ft_putstr_fd("minishell: No such file or directory:\n", 2);
 	else if (err_type == NPERM)
-		ft_putstr_fd("minishell: permission denied: ", 2);
+		ft_putstr_fd("minishell: permission denied: \n", 2);
 	else if (err_type == ENVF)
 		printf("minishell: %s %s: invalid flag \n", ag[0], ag[1]);
 	else if (err_type == NCMD)
-		ft_putstr_fd("minishell: command not found: ", 2);
+		ft_putstr_fd("minishell: command not found: \n", 2);
 	else if (err_type == DUPERR)
 		ft_putstr_fd("minishell: dup2 failed\n", 2);
 	else if (err_type == FORKERR)
@@ -32,11 +32,11 @@ void	*mini_perror(char **ag, int err_type, char *param, int err)
 	else if (err_type == NOT_DIR)
 		ft_putstr_fd("minishell: Not a directory: ", 2);
 	else if (err_type == NOT_VAL_IDENT)
-		printf("minishell: %s: `%s': not a valid identifier\n", ag[0], ag[1]);
+		ft_putstr_fd("minishell: not a valid identifier\n",2);
 	else if (err_type == INV_OPTION)
-		printf("minishell: %s: `%c%c': invalid option\n", ag[0], ag[1][0], ag[1][1]);
+		ft_putstr_fd("minishell: invalid option\n", 2);
 	else if (err_type == MANY_ARG)
-		printf("minishell: %s: %s: too many arguments:\n", ag[0], ag[1]);;
+		ft_putstr_fd("minishell: too many arguments:\n", 2);
 	ft_putendl_fd(param, 2);
 	return (NULL);
 }
@@ -83,7 +83,7 @@ int	mini_exit(t_list *cmd, int *is_exit)
 		ft_putstr_fd("minishell: exit: ", 2);
 		ft_putstr_fd(node->full_cmd[1], 2);
 		ft_putstr_fd(": numeric argument required\n", 2);
-		return (255);
+		return (2);
 	}
 	else if (node->full_cmd[2])
 	{
