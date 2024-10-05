@@ -311,8 +311,10 @@ int if_alfnum_(char **cmds)
 		{
 			if (!((cmds[i][j] >= 'a' && cmds[i][j] <= 'z') || (cmds[i][j] >= 'A' &&
 				cmds[i][j] <= 'Z') || (cmds[i][j] >= '0' && cmds[i][j] <= '9') ||
-				cmds[i][j] == '_' || cmds[i][j] == '=') || (cmds[i][0] >= '0' && cmds[i][0] <= '9'))
+				cmds[i][j] == '_' || cmds[i][j] == '=' ) || (cmds[i][0] == '=') || (cmds[i][0] >= '0' && cmds[i][0] <= '9'))
 				return (0);
+			if (cmds[i][j + 1] == '=')
+				return (1);
 		}
 	}
 	return(1);
