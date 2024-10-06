@@ -36,7 +36,6 @@ static DIR	*cmd_checks(t_prompt *prompt, t_list *cmd, char ***s, char *path)
 
 	dir = NULL;
 	n = cmd->content;
-	//printf("check: %s", n->full_cmd[1]);
 	if (n && n->full_cmd)
 		dir = opendir(*n->full_cmd);
 	if (n && n->full_cmd && ft_strchr(*n->full_cmd, '/') && !dir)
@@ -63,13 +62,7 @@ void	get_cmd(t_prompt *prompt, t_list *cmd, char **s, char *path)
 	t_mini	*n;
 	DIR		*dir;
 
-	n = cmd->content;/*
-	int i = 0;
-	while (n->full_cmd[i])
-	{
-		printf("argumentos del fullcmd: %s y path: %s\n", n->full_cmd[i], n->full_path);
-		i++;
-	}*/
+	n = cmd->content;
 	dir = cmd_checks(prompt, cmd, &s, path);
 	if (!is_builtin(n) && n && n->full_cmd && dir)
 		mini_perror(NULL, IS_DIR, *n->full_cmd, 126);

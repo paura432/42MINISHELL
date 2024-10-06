@@ -10,7 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include "../inc/minishell.h"
 
 static void	update_output(char ***matrix, int fd)

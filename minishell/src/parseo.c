@@ -11,65 +11,38 @@
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
+
 extern int g_status;
 
 static	char	**split_all(char **argc, t_prompt *prompt)
 {
 	char	**subsplit;
-	int	i;
-	int	quotes[2];
+	int		i;
+	int		quotes[2];
 
 	i = -1;
-	//recorremos la matriz pero ojo cada posicion es un string entero de la matriz
-	//{"caso0  ", "caso1  ", "caso2 "}
 	while (argc && argc[++i])
 	{
-		//expandimos las variables es decir que si se llama a una variable de entorno, modificamos el prompt
-		//por su ruta entera
 		argc[i] = expand_vars(argc[i], -1, quotes, prompt);
-		//este segundo caso es para reemplazar la ~ por HOME
 		argc[i] = expand_path(argc[i], -1, quotes, \
 		mini_getenv("HOME", prompt->envp, 4));
-		//dividimos los comandos para tuberias y redirecciones
 		subsplit = ft_cmdsubsplit(argc[i], "<|>");
-		//como dice su nombre reemplazamos la matriz en cuestion
 		ft_matrix_replace_in(&argc, subsplit, i);
 		i += ft_matrixlen(subsplit) - 1;
 		ft_free_matrix(&subsplit);	
-		
-	}/*
-	int j = 0;
-	while (argc[j])
-	{
-		printf("es %s\n", argc[j]);
-		j++;
-	}*/
-	
+	}
 	return (argc);
 }
 
 static	void	*parse_args(char **argc, t_prompt *prompt)
 {
-	int is_exit;
-	int i;
+	int	is_exit;
+	int	i;
 
 	is_exit = 0;
-	//char **j = split_all(argc,prompt);
-	//printf("split: %s\n", j[0]);
-	//accedemos a la lista de nuestra estructura para trasladar los datos
 	prompt->cmds = fill_nodes(split_all(argc, prompt), -1);
 	if (!prompt->cmds)
 		return (prompt);
-	//buscamos la posicion del ultimo nodo
-	 /*
-	int t = 0;
-	t_mini *hola = (t_mini *)prompt->cmds->content;
-	while (hola->full_cmd[t])
-	{
-		printf("%s estos son los argumentos\n", hola->full_cmd[t]);
-		t++;
-	}*/
-
 	i = ft_lstsize(prompt->cmds);
 	g_status = builtin(prompt, prompt->cmds, &is_exit, 0);
 	while (i-- > 0)
@@ -86,37 +59,29 @@ static	void	*parse_args(char **argc, t_prompt *prompt)
 	return (prompt);
 }
 
-//Añade historial y comprobamos los comandos por orden creciente
 void	*check_args(char *out, t_prompt *prompt)
 {
 	char	**a;
 	t_mini	*n;
 
 	if (!out)
-	{
-		printf("exit\n");
-		return (NULL);
-	}
-	//añadimos el historial en caso del que prompt no este vacio
+		return (printf("exit\n"), NULL);
 	if (out[0] != '\0')
 		add_history(out);
-	//procedimientos para obtener la matriz de comandos, con la comprobacion de entre comillado y separado por espacios
 	a = ft_cmdtrim(out, " ");
-	//ya no necesitamos el prompt
 	free(out);
-	//si la matriz es null es porque ha ocurrido un error de entre comillado por tanto llamamos y indicamos el error
 	if (!a)
 		mini_perror(NULL, QUOTE, NULL, 1);
-	//y retornamos el vacio
 	if (!a)
 		return ("");
 	prompt = parse_args(a, prompt);
 	if (prompt && prompt->cmds)
 		n = prompt->cmds->content;
-	if (prompt && prompt->cmds && n && n->full_cmd && ft_lstsize(prompt->cmds) == 1)
+	if (prompt && prompt->cmds && n && n->full_cmd
+		&& ft_lstsize(prompt->cmds) == 1)
 	{
-		prompt->envp = mini_setenv("_", n->full_cmd[ft_matrixlen(n->full_cmd) - 1], \
-			prompt->envp, 1);
+		prompt->envp = mini_setenv("_", n->full_cmd
+			[ft_matrixlen(n->full_cmd) - 1], prompt->envp, 1);
 	}
 	if (prompt && prompt->cmds)
 		ft_lstclear(&prompt->cmds, free_content);

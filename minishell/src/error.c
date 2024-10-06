@@ -23,7 +23,13 @@ void	*mini_perror(char **ag, int err_type, char *param, int err)
 		ft_putstr_fd("minishell: fork failed\n", 2);
 	else if (err_type == PIPERR)
 		ft_putstr_fd("minishell: error creating pipe\n", 2);
-	else if (err_type == PIPENDERR)
+	continue_err(ag, err_type, param, err);
+	return (NULL);
+}
+
+void	continue_err(char **ag, int err_type, char *param, int err)
+{
+	if (err_type == PIPENDERR)
 		ft_putstr_fd("minishell: syntax error near unexpected token `|'\n", 2);
 	else if (err_type == MEM)
 		ft_putstr_fd("minishell: no memory left on device\n", 2);
@@ -38,7 +44,7 @@ void	*mini_perror(char **ag, int err_type, char *param, int err)
 	else if (err_type == MANY_ARG)
 		ft_putstr_fd("minishell: too many arguments:\n", 2);
 	ft_putendl_fd(param, 2);
-	return (NULL);
+	return ;
 }
 
 int	ft_atoi2(const char *nptr, long *nbr)

@@ -18,36 +18,36 @@
 
 typedef struct s_prompt
 {
-    t_list *cmds;
-    char    **envp;
-    pid_t   pid;
-} t_prompt;
+	t_list	*cmds;
+	char	**envp;
+	pid_t	pid;
+}		t_prompt;
 
 typedef struct s_mini
 {
-    char **full_cmd;
-    char *full_path;
-    int infile;
-    int outfile;
-}t_mini;
+	char	**full_cmd;
+	char	*full_path;
+	int		infile;
+	int		outfile;
+}		t_mini;
 
 enum e_mini_error
 {
-    QUOTE =1,
-    NDIR = 2,
-    NPERM = 3,
-    NCMD = 6,
-    DUPERR = 7,
-    FORKERR = 8,
-    PIPERR = 9,
-    PIPENDERR = 10,
-    MEM = 11,
-    IS_DIR = 12,
-    NOT_DIR = 13,
-    NOT_VAL_IDENT = 14,
-    INV_OPTION = 15,
-    MANY_ARG = 16,
-    ENVF = 17,
+	QUOTE =1,
+	NDIR = 2,
+	NPERM = 3,
+	NCMD = 6,
+	DUPERR = 7,
+	FORKERR = 8,
+	PIPERR = 9,
+	PIPENDERR = 10,
+	MEM = 11,
+	IS_DIR = 12,
+	NOT_DIR = 13,
+	NOT_VAL_IDENT = 14,
+	INV_OPTION = 15,
+	MANY_ARG = 16,
+	ENVF = 17,
 };
 
 char	*mini_readline(t_prompt *prompt, char *str);
@@ -88,39 +88,41 @@ void	free_content(void *content);
 void	handle_sigint(int sig);
 void	handle_sigint_child(int sig);
 
-int	ft_between_chars(char *s, char *set, char char1, char char2);
+int		ft_between_chars(char *s, char *set, char char1, char char2);
 char	*ft_chartostr(char c);
 char	**ft_dup_matrix(char **m);
 char	**ft_extend_matrix(char **in, char *newstr);
 void	ft_free_matrix(char ***m);
-int	ft_isspace(char c);
+int		ft_isspace(char c);
 char	**ft_lsttomatrix(t_list *lst);
 char	**ft_matrix_replace_in(char ***big, char **small, int n);
-int	ft_matrixlen(char **m);
+int		ft_matrixlen(char **m);
 t_list	*ft_matrixtolst(char **matrix);
-int	ft_nbrlen(long n, int base);
-int	ft_putmatrix_fd(char **m, int nl, int fd);
-int	ft_putnbr_base_fd(long n, char *base, int fd);
-int	ft_putnchar_fd(char c, int fd, int n);
-int	ft_putstrn_fd(char *s, int fd, int n);
-int	ft_recursive_power(int nb, int power);
-int	ft_sqrt(int nb);
-int	ft_strchr_i(const char *s, int c);
+int		ft_nbrlen(long n, int base);
+int		ft_putmatrix_fd(char **m, int nl, int fd);
+int		ft_putnbr_base_fd(long n, char *base, int fd);
+int		ft_putnchar_fd(char c, int fd, int n);
+int		ft_putstrn_fd(char *s, int fd, int n);
+int		ft_recursive_power(int nb, int power);
+int		ft_sqrt(int nb);
+int		ft_strchr_i(const char *s, int c);
 char	*ft_strenlarge(char *s1, char *s2);
-int	ft_strrncmp(const char *s1, const char *s2, size_t n);
+int		ft_strrncmp(const char *s1, const char *s2, size_t n);
 char	**ft_subsplit(char const *s, char *needle);
 char	*ft_uitoa(unsigned int n);
-int	ft_countchar(char *s, char c);
-int	ft_strchars_i(const char *s, char *set);
+int		ft_countchar(char *s, char c);
+int		ft_strchars_i(const char *s, char *set);
 char	*expand_path(char *str, int i, int quotes[2], char *var);
 char	*expand_vars(char *str, int i, int quotes[2], t_prompt *prompt);
-int	ft_putendl_fd_2(char *s, int fd);
-int	ft_putstr_fd_2(char *s, int fd);
-int	ft_putchar_fd_2(char c, int fd);
-int ft_prub(char **args, int i);
+int		ft_putendl_fd_2(char *s, int fd);
+int		ft_putstr_fd_2(char *s, int fd);
+int		ft_putchar_fd_2(char c, int fd);
+int		ft_prub(char **args, int i);
 
 //pablo
-int	export_wrong(char **ag);
-int if_alfnum_(char **cmds);
+int		export_wrong(char **ag);
+int		if_alfnum_(char **cmds);
+void	signal_exec(t_prompt *prompt, t_list *cmd);
+void	continue_err(char **ag, int err_type, char *param, int err);
 
 #endif

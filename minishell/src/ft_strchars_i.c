@@ -27,4 +27,4 @@ int	ft_strchars_i(const char *s, char *set)
 		i++;
 	}
 	return (-1);
-}	
+}

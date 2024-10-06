@@ -1,17 +1,16 @@
-
-
 #include "../inc/minishell.h"
 
 extern int g_status;
 
-static int comprobacion_cmd(t_mini *mini, char *env, int l)
+static int	comprobacion_cmd(t_mini *mini, char *env, int l)
 {
-	int i;
+	int	i;
+
 	i = 0;
 	if (ft_matrixlen(mini->full_cmd) >= 2)
 	{
 		mini_perror(mini->full_cmd, 17, NULL, 1);
-		return 1;
+		return (1);
 	}
 	else
 	{
@@ -27,10 +26,10 @@ void	child_builtin(t_prompt *prompt, t_mini *mini, int l, t_list *cmd)
 		execve(mini->full_path, mini->full_cmd, prompt->envp);
 	else if (mini->full_cmd && !ft_strncmp(*mini->full_cmd, "pwd", l) \
 			&& l == 3)
-			g_status = mini_pwd();
+		g_status = mini_pwd();
 	else if (is_builtin(mini) && mini->full_cmd && \
 			!ft_strncmp(*mini->full_cmd, "echo", l) && l == 4)
-			g_status = mini_echo(cmd);
+		g_status = mini_echo(cmd);
 	else if (is_builtin(mini) && mini->full_cmd && \
 			!comprobacion_cmd(mini, "env", l) && l == 3)
 	{
@@ -97,7 +96,7 @@ void	exec_fork(t_prompt *prompt, t_list *cmd, int fd[2])
 
 void	*check_to_fork(t_prompt *prompt, t_list *cmd, int fd[2])
 {
-	t_mini *mini;
+	t_mini	*mini;
 	DIR		*dir;
 
 	mini = cmd->content;
@@ -106,13 +105,14 @@ void	*check_to_fork(t_prompt *prompt, t_list *cmd, int fd[2])
 		dir = opendir(*mini->full_cmd);
 	if (mini->infile == -1 || mini->outfile == -1)
 		return (NULL);
-	if ((mini->full_path && access(mini->full_path, X_OK) == 0) || is_builtin(mini))
+	if ((mini->full_path && access(mini->full_path, X_OK) == 0)
+		|| is_builtin(mini))
 		exec_fork(prompt, cmd, fd);
 	else if (!is_builtin(mini) && ((mini->full_path && \
 			!access(mini->full_path, F_OK)) || dir))
-			g_status = 126;
+		g_status = 126;
 	else if (!is_builtin(mini) && mini->full_cmd)
-			g_status = 127;
+		g_status = 127;
 	if (dir)
 		closedir(dir);
 	return ("");

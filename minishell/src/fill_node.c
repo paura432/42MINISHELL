@@ -1,5 +1,3 @@
-
-
 #include "../inc/minishell.h"
 
 static t_mini	*mini_init(void)
@@ -15,12 +13,11 @@ static t_mini	*mini_init(void)
 	mini->outfile = STDOUT_FILENO;
 	return (mini);
 }
-//especidicacion de las tedirecciones del comando
+
 static t_mini	*get_params(t_mini *node, char **a[2], int *i)
 {
 	if (a[0][*i])
 	{
-		//printf("entramos\n");
 		if (a[0][*i][0] == '>' && a[0][*i + 1] && a[0][*i + 1][0] == '>')
 			node = get_outfile2(node, a[1], i);
 		else if (a[0][*i][0] == '>')
@@ -30,7 +27,7 @@ static t_mini	*get_params(t_mini *node, char **a[2], int *i)
 			node = get_infile2(node, a[1], i);
 		else if (a[0][*i][0] == '<')
 			node = get_infile1(node, a[1], i);
-		else if (a[0][*i][0] != '|')//se añade a la matriz el comando a ejecutar
+		else if (a[0][*i][0] != '|')
 			node->full_cmd = ft_extend_matrix(node->full_cmd, a[1][*i]);
 		else
 		{
@@ -69,20 +66,18 @@ static t_list	*stop_fill(t_list *cmds, char **args, char **temp)
 	return (NULL);
 }
 
-int ft_prub(char **args, int i)
+int	ft_prub(char **args, int i)
 {
-	int j = i;
+	int	j;
+
+	j = i;
 	while (args[j])
 	{
-		//printf("\nentro %s\n",args[j]);
 		if (ft_strchr(args[j], '|'))
-		{
-			//printf("encontro");
-			return 1;
-		}
+			return (1);
 		j++;
 	}
-	return 0;
+	return (0);
 }
 
 t_list	*fill_nodes(char **args, int i)
@@ -92,33 +87,22 @@ t_list	*fill_nodes(char **args, int i)
 
 	cmds[0] = NULL;
 	temp[1] = get_trimmed(args);
-	//aqui ya tenemos los comandos limpios para ejecutar, solo faltarian las excepciones en caso de tuberias 
 	while (args[++i])
 	{
-		//en la lista 1 se le mete al final el nodo 0
 		cmds[1] = ft_lstlast(cmds[0]);
-		//en caso de comenzar con tuberia, respetar el orden de ejecucion pasando el nodo a la penultima posicion
 		if (i == 0 || (args[i][0] == '|' && args[i + 1] && args[i + 1][0]))
 		{
-			//printf("identifico el pipe: %s\n",args[i]);
 			i += args[i][0] == '|';
-			//posicionamos el nodo y creamos una instancia vacia en donde manejaremos los procesos por stdout y in
 			ft_lstadd_back(&cmds[0], ft_lstnew(mini_init()));
-			//reacomodamos el nodo
 			cmds[1] = ft_lstlast(cmds[0]);
-			
 		}
-		//printf("es aqui: %s\n",args[i]);
-		
 		temp[0] = args;
 		cmds[1]->content = get_params(cmds[1]->content, temp, &i);
-		//printf("\npaso final %i\n", i);
 		if (i < 0)
 			return (stop_fill(cmds[0], args, temp[1]));
 		if (!args[i])
 			break ;
 	}
-	//se pasa el contenido de la matriz a los nodos y limpiamos
 	ft_free_matrix(&temp[1]);
 	ft_free_matrix(&args);
 	return (cmds[0]);

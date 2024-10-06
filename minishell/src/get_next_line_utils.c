@@ -1,4 +1,3 @@
-
 #include "../inc/minishell.h"
 
 size_t	gnl_strlen(const char *s)

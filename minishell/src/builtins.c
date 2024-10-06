@@ -1,4 +1,3 @@
-
 #include "../inc/minishell.h"
 
 extern int	g_status;
@@ -7,11 +6,8 @@ int	builtin(t_prompt *prompt, t_list *cmd, int *is_exit, int n)
 {
 	char	**a;
 
-	//definir que tipo de comando debemos ejecutar
-	//una vez ejecutada saltamos al siguiente nodo
 	while (cmd)
 	{
-		
 		a = ((t_mini *)cmd->content)->full_cmd;
 		n = 0;
 		if (a)
@@ -27,19 +23,19 @@ int	builtin(t_prompt *prompt, t_list *cmd, int *is_exit, int n)
 		else if (!cmd->next && a && !ft_strncmp(*a, "unset", n) && n == 5)
 			g_status = mini_unset(prompt);
 		else
-		{
-			signal(SIGINT, SIG_IGN);
-			signal(SIGQUIT, SIG_IGN);
-			//printf("\n en cmd a: %s\n", a[1]);
-			exec_cmd(prompt, cmd);
-		}
-		//printf("antes %s", (char *)cmd);
+			signal_exec(prompt, cmd);
 		cmd = cmd->next;
-		//printf("despues %s", (char *)cmd);
 	}
 	return (g_status);
 }
-//igual comprobando que es ejecutable
+
+void	signal_exec(t_prompt *prompt, t_list *cmd)
+{
+	signal(SIGINT, SIG_IGN);
+	signal(SIGQUIT, SIG_IGN);
+	exec_cmd(prompt, cmd);
+}
+
 int	is_builtin(t_mini *n)
 {
 	int		l;
@@ -66,7 +62,7 @@ int	is_builtin(t_mini *n)
 		return (1);
 	return (0);
 }
-//luego de movernos debemos actualizar las variables de entorno
+
 int	mini_cd(t_prompt *p)
 {
 	char	**str[2];
@@ -74,7 +70,6 @@ int	mini_cd(t_prompt *p)
 
 	g_status = 0;
 	str[0] = ((t_mini *)p->cmds->content)->full_cmd;
-
 	aux = mini_getenv("HOME", p->envp, 4);
 	if (!aux)
 		aux = ft_strdup("");
@@ -95,7 +90,7 @@ int	mini_cd(t_prompt *p)
 	ft_free_matrix(&str[1]);
 	return (g_status);
 }
-//lo mismo getcwd y ya
+
 int	mini_pwd(void)
 {
 	char	*buf;
@@ -105,7 +100,7 @@ int	mini_pwd(void)
 	free(buf);
 	return (0);
 }
-//el echo no ha cambiado practicamente
+
 int	mini_echo(t_list *cmd)
 {
 	int		newline;
@@ -120,7 +115,6 @@ int	mini_echo(t_list *cmd)
 	argv = node->full_cmd;
 	while (argv && argv[++i[0]])
 	{
-		//printf("es %s\n", argv[i[0]]);
 		if (!i[1] && !ft_strncmp(argv[i[0]], "-n", 2) && \
 			(ft_countchar(argv[i[0]], 'n') == \
 			(int)(ft_strlen(argv[i[0]]) - 1)))
@@ -135,4 +129,3 @@ int	mini_echo(t_list *cmd)
 	}
 	return (write(1, "\n", newline) == 2);
 }
-
