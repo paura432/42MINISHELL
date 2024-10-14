@@ -6,7 +6,7 @@
 /*   By: pau <pau@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 23:55:32 by pau               #+#    #+#             */
-/*   Updated: 2024/10/14 23:55:33 by pau              ###   ########.fr       */
+/*   Updated: 2024/10/15 00:32:08 by pau              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,5 +136,8 @@ int		export_wrong(char **ag);
 int		if_alfnum_(char **cmds);
 void	signal_exec(t_prompt *prompt, t_list *cmd);
 void	continue_err(char **ag, int err_type, char *param, int err);
+void	show_export_env(char *str);
+char	**ft_comprobar_prompt(t_prompt *prompt);
+char	*ft_strjoin_free(char *s1, const char *s2);
 
 #endif

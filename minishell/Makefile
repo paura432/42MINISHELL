@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jpajuelo <jpajuelo@student.42.fr>          +#+  +:+       +#+         #
+#    By: pau <pau@student.42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/19 13:58:48 by jpajuelo          #+#    #+#              #
-#    Updated: 2024/09/03 14:46:03 by jpajuelo         ###   ########.fr        #
+#    Updated: 2024/10/15 00:36:35 by pau              ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -45,7 +45,7 @@ SRC = builtins.c custom_cmd.c  env.c error.c exec.c expand.c fill_node.c ft_cmd_
 		ft_extend_matrix.c ft_free_matrix.c ft_isspce.c ft_lsttomatrix.c ft_putendl_fd_2.c ft_putstr_fd_2.c ft_putchar_fd_2.c\
 		ft_matrix_replace_in.c ft_matrixlen.c ft_matrixtolst.c ft_nbrlen.c \
 		ft_putmatrix_fd.c ft_putnbr_base_fd.c ft_putnchar_fd.c ft_putstrn_ds.c ft_recursive_power.c\
-		ft_sqrt.c ft_strchars_i.c ft_strchr_i.c ft_strenlarge.c ft_strrncmp.c ft_subsplit.c ft_uitoa.c
+		ft_sqrt.c ft_strchars_i.c ft_strchr_i.c ft_strenlarge.c ft_strrncmp.c ft_subsplit.c ft_uitoa.c env_2.c env_3.c env_4.c
 
 OBJ = $(addprefix $(OBJ_DIR)/, $(SRC:.c=.o))
 SRC_COUNT_TOT := $(shell expr $(shell echo -n $(SRC) | wc -w) - $(shell ls -l $(OBJ_DIR) 2>&1 | grep ".o" | wc -l) + 1)
