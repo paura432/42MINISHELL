@@ -1,20 +1,32 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   minishell.h                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: pau <pau@student.42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/10/14 23:55:32 by pau               #+#    #+#             */
+/*   Updated: 2024/10/14 23:55:33 by pau              ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef MINISHELL_H
-#define MINISHELL_H
+# define MINISHELL_H
 
-#include "../libft/inc/libft.h"
-#include "get_next_line.h"
-#include "color.h"
-#include <fcntl.h>
-#include <readline/readline.h>
-#include <readline/history.h>
-#include <dirent.h>
-#include <signal.h>
-#include <sys/wait.h>
-#include <sys/ioctl.h>
-#include <unistd.h>
+# include "../libft/inc/libft.h"
+# include "get_next_line.h"
+# include "color.h"
+# include <fcntl.h>
+# include <readline/readline.h>
+# include <readline/history.h>
+# include <dirent.h>
+# include <signal.h>
+# include <sys/wait.h>
+# include <sys/ioctl.h>
+# include <unistd.h>
 
-#define READ_END 0
-#define WRITE_END 1
+# define READ_END 0
+# define WRITE_END 1
 
 typedef struct s_prompt
 {

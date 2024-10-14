@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_params.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: pau <pau@student.42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/10/14 23:53:47 by pau               #+#    #+#             */
+/*   Updated: 2024/10/14 23:53:53 by pau              ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../inc/minishell.h"
 
 extern int	g_status;
@@ -43,7 +55,7 @@ t_mini	*get_outfile1(t_mini *node, char **args, int *i)
 		if (!ft_prub(args,*i))
 		{
 			*i = -1;
-			mini_perror(NULL, NDIR, NULL,1);
+			mini_perror(NULL, NDIR, NULL, 1);
 		}
 		if (node->outfile != -1)
 		{

@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   color.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jpajuelo <jpajuelo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pau <pau@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 13:55:49 by jpajuelo          #+#    #+#             */
-/*   Updated: 2024/08/21 13:56:43 by jpajuelo         ###   ########.fr       */
+/*   Updated: 2024/10/14 23:55:21 by pau              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef COLORS_H
+#ifndef COLOR_H
 
-# define COLORS_H
+# define COLOR_H
 
 # define DEFAULT "\001\033[0;39m\002"
 # define GRAY "\001\033[1;90m\002"

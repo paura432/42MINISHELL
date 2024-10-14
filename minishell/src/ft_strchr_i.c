@@ -3,16 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strchr_i.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jpajuelo <jpajuelo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pau <pau@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/24 09:11:09 by jpajuelo          #+#    #+#             */
-/*   Updated: 2024/08/21 14:24:06 by jpajuelo         ###   ########.fr       */
+/*   Updated: 2024/10/14 23:53:10 by pau              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 
-//cuantas veces se repite la letra en el string
 int	ft_strchr_i(const char *s, int c)
 {
 	unsigned char	c_unsigned;

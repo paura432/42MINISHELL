@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prompt.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jpajuelo <jpajuelo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pau <pau@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 10:01:13 by jpajuelo          #+#    #+#             */
-/*   Updated: 2024/08/21 16:16:45 by jpajuelo         ###   ########.fr       */
+/*   Updated: 2024/10/14 23:57:08 by pau              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 extern int g_status;
 
-static char *get_home(t_prompt prompt)
+static char	*get_home(t_prompt prompt)
 {
 	char	*temp;
 	char	*pwd;
@@ -24,7 +24,7 @@ static char *get_home(t_prompt prompt)
 	if (!pwd)
 		pwd = ft_strdup("∅ ");
 	home = mini_getenv("HOME", prompt.envp, 4);
-	if (home && home[0] && ft_strnstr(pwd , home, ft_strlen(pwd)))
+	if (home && home[0] && ft_strnstr(pwd, home, ft_strlen(pwd)))
 	{
 		temp = pwd;
 		pwd = ft_strjoin("~", &pwd[ft_strlen(home)]);

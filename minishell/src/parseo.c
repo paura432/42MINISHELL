@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parseo.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: pau <pau@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 11:14:27 by jpajuelo          #+#    #+#             */
-/*   Updated: 2024/09/10 22:18:31 by marvin           ###   ########.fr       */
+/*   Updated: 2024/10/14 23:54:17 by pau              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static	char	**split_all(char **argc, t_prompt *prompt)
 		subsplit = ft_cmdsubsplit(argc[i], "<|>");
 		ft_matrix_replace_in(&argc, subsplit, i);
 		i += ft_matrixlen(subsplit) - 1;
-		ft_free_matrix(&subsplit);	
+		ft_free_matrix(&subsplit);
 	}
 	return (argc);
 }

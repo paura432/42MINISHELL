@@ -3,14 +3,12 @@
 /*                                                        :::      ::::::::   */
 /*   ft_dup_matrix.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jpajuelo <jpajuelo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pau <pau@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/24 09:10:00 by jpajuelo          #+#    #+#             */
-/*   Updated: 2024/08/21 14:22:59 by jpajuelo         ###   ########.fr       */
+/*   Updated: 2024/10/14 23:52:15 by pau              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-//matriz de arreglo es decir {"","","",NULL};
 
 #include "../inc/minishell.h"
 

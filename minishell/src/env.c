@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: pau <pau@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 13:59:02 by jpajuelo          #+#    #+#             */
-/*   Updated: 2024/09/11 23:23:00 by marvin           ###   ########.fr       */
+/*   Updated: 2024/10/14 23:51:20 by pau              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 char	*mini_getenv(char *var, char **envp, int n)
 {
-	int i;
-	int n2;
+	int	i;
+	int	n2;
 
 	i = 0;
 	if (n < 0)
@@ -61,7 +61,7 @@ char	**mini_setenv(char *var, char *value, char **envp, int n)
 	return (envp);
 }
 
-static	int		where_envp(char *argc, char **envp)
+static	int	where_envp(char *argc, char **envp)
 {
 	int	i;
 
@@ -85,7 +85,7 @@ static	int		where_envp(char *argc, char **envp)
 	return (0);
 }
 
-static	int		var_in_envp(char *argc, char **envp, int ij[2])
+static	int	var_in_envp(char *argc, char **envp, int ij[2])
 {
 	ij[1] = 0;
 
@@ -150,12 +150,12 @@ char	**ft_comprobar_prompt(t_prompt *prompt)
 	puntero = (t_list *)prompt->cmds;
 	while (puntero->next)
 	{
-		if (!ft_strncmp(((t_mini*)puntero->content)->full_cmd[0], "export", 6))
-			return ((t_mini*)puntero->content)->full_cmd;
+		if (!ft_strncmp(((t_mini *)puntero->content)->full_cmd[0], "export", 6))
+			return (((t_mini *)puntero->content)->full_cmd);
 		puntero = puntero->next;
 	}
-	if (!ft_strncmp(((t_mini*)puntero->content)->full_cmd[0], "export", 6))
-		return ((t_mini*)puntero->content)->full_cmd;
+	if (!ft_strncmp(((t_mini *)puntero->content)->full_cmd[0], "export", 6))
+		return (((t_mini *)puntero->content)->full_cmd);
 	return (NULL);
 
 }
@@ -241,7 +241,7 @@ int	export_wrong(char **argc)
 {
 	if (ft_matrixlen(argc) >= 2 && argc[1][0] == '-')
 	{
-		mini_perror(argc, INV_OPTION, NULL,  1);
+		mini_perror(argc, INV_OPTION, NULL, 1);
 		return (0);	
 	}
 	else if (!if_alfnum_(argc))
@@ -263,9 +263,12 @@ int	if_alfnum_(char **cmds)
 		j = -1;
 		while (cmds[i][++j])
 		{
-			if (!((cmds[i][j] >= 'a' && cmds[i][j] <= 'z') || (cmds[i][j] >= 'A' &&
-				cmds[i][j] <= 'Z') || (cmds[i][j] >= '0' && cmds[i][j] <= '9') ||
-				cmds[i][j] == '_' || cmds[i][j] == '=' ) || (cmds[i][0] == '=') || (cmds[i][0] >= '0' && cmds[i][0] <= '9'))
+			if (!((cmds[i][j] >= 'a' && cmds[i][j] <= 'z') ||
+				(cmds[i][j] >= 'A' && cmds[i][j] <= 'Z') ||
+				(cmds[i][j] >= '0' && cmds[i][j] <= '9') ||
+				cmds[i][j] == '_' || cmds[i][j] == '=' ) ||
+				(cmds[i][0] == '=') || (cmds[i][0] >= '0' &&
+				cmds[i][0] <= '9'))
 				return (0);
 			if (cmds[i][j + 1] == '=')
 				return (1);
@@ -286,7 +289,7 @@ int	mini_unset(t_prompt *prompt)
 	{
 		while (argc[++ij[0]])
 		{
-			if (argc[ij[0]][ft_strlen(argc[ij[0]]) -1] != '=')
+			if (argc[ij[0]][ft_strlen(argc[ij[0]]) - 1] != '=')
 			{
 				aux = ft_strjoin(argc[ij[0]], "=");
 				free(argc[ij[0]]);
