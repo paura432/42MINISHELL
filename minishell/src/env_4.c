@@ -6,9 +6,22 @@
 /*   By: pau <pau@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 00:35:51 by pau               #+#    #+#             */
-/*   Updated: 2024/10/15 00:37:30 by pau              ###   ########.fr       */
+/*   Updated: 2024/10/20 21:56:35 by pau              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 
+int	ft_prub(char **args, int i)
+{
+	int	j;
+
+	j = i;
+	while (args[j])
+	{
+		if (ft_strchr(args[j], '|'))
+			return (1);
+		j++;
+	}
+	return (0);
+}

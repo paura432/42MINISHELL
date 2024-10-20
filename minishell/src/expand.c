@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jpajuelo <jpajuelo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pau <pau@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 14:21:29 by jpajuelo          #+#    #+#             */
-/*   Updated: 2024/08/20 16:53:17 by jpajuelo         ###   ########.fr       */
+/*   Updated: 2024/10/15 11:24:04 by pau              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,4 +86,42 @@ char	*expand_vars(char *str, int i, int quotes[2], t_prompt *prompt)
 				quotes, prompt));
 	}
 	return (str);
+}
+
+void	free_content(void *content)
+{
+	t_mini	*node;
+
+	node = content;
+	ft_free_matrix(&node->full_cmd);
+	free(node->full_path);
+	if (node->infile != STDIN_FILENO)
+		close(node->infile);
+	if (node->outfile != STDOUT_FILENO)
+		close(node->outfile);
+	free(node);
+}
+
+void	*check_to_fork(t_prompt *prompt, t_list *cmd, int fd[2])
+{
+	t_mini	*mini;
+	DIR		*dir;
+
+	mini = cmd->content;
+	dir = NULL;
+	if (mini->full_cmd)
+		dir = opendir(*mini->full_cmd);
+	if (mini->infile == -1 || mini->outfile == -1)
+		return (NULL);
+	if ((mini->full_path && access(mini->full_path, X_OK) == 0)
+		|| is_builtin(mini))
+		exec_fork(prompt, cmd, fd);
+	else if (!is_builtin(mini) && ((mini->full_path && \
+			!access(mini->full_path, F_OK)) || dir))
+		g_status = 126;
+	else if (!is_builtin(mini) && mini->full_cmd)
+		g_status = 127;
+	if (dir)
+		closedir(dir);
+	return ("");
 }

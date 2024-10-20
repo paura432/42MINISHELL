@@ -6,7 +6,7 @@
 /*   By: pau <pau@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 23:55:32 by pau               #+#    #+#             */
-/*   Updated: 2024/10/15 00:32:08 by pau              ###   ########.fr       */
+/*   Updated: 2024/10/20 21:52:16 by pau              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,5 +139,15 @@ void	continue_err(char **ag, int err_type, char *param, int err);
 void	show_export_env(char *str);
 char	**ft_comprobar_prompt(t_prompt *prompt);
 char	*ft_strjoin_free(char *s1, const char *s2);
+void	*check_to_fork(t_prompt *prompt, t_list *cmd, int fd[2]);
+void	exec_fork(t_prompt *prompt, t_list *cmd, int fd[2]);
+int		where_envp(char *argc, char **envp);
+int		var_in_envp(char *argc, char **envp, int ij[2]);
+void	display_export(t_prompt *prompt);
+void	extract_key_value(char *arg, char **key, char **value);
+void	update_existing_var(t_prompt *prompt, char *key, char *value, int pos);
+void	add_new_var(t_prompt *prompt, char *key, char *value);
+int		mini_export(t_prompt *prompt);
+void	handle_export_argument(t_prompt *prompt, char *arg, int ij[2]);
 
 #endif

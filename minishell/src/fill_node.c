@@ -6,7 +6,7 @@
 /*   By: pau <pau@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 23:51:26 by pau               #+#    #+#             */
-/*   Updated: 2024/10/14 23:51:35 by pau              ###   ########.fr       */
+/*   Updated: 2024/10/20 21:56:08 by pau              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,20 +76,6 @@ static t_list	*stop_fill(t_list *cmds, char **args, char **temp)
 	ft_free_matrix(&temp);
 	ft_free_matrix(&args);
 	return (NULL);
-}
-
-int	ft_prub(char **args, int i)
-{
-	int	j;
-
-	j = i;
-	while (args[j])
-	{
-		if (ft_strchr(args[j], '|'))
-			return (1);
-		j++;
-	}
-	return (0);
 }
 
 t_list	*fill_nodes(char **args, int i)

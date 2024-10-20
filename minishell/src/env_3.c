@@ -6,7 +6,7 @@
 /*   By: pau <pau@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 00:33:45 by pau               #+#    #+#             */
-/*   Updated: 2024/10/15 00:34:44 by pau              ###   ########.fr       */
+/*   Updated: 2024/10/15 11:27:43 by pau              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,12 @@ int	export_wrong(char **argc)
 	if (ft_matrixlen(argc) >= 2 && argc[1][0] == '-')
 	{
 		mini_perror(argc, INV_OPTION, NULL, 1);
-		return (0);	
+		return (0);
 	}
 	else if (!if_alfnum_(argc))
 	{
 		mini_perror(argc, NOT_VAL_IDENT, NULL, 1);
-		return (0);	
+		return (0);
 	}
 	return (1);
 }

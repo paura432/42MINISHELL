@@ -6,7 +6,7 @@
 /*   By: pau <pau@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 23:50:52 by pau               #+#    #+#             */
-/*   Updated: 2024/10/14 23:51:17 by pau              ###   ########.fr       */
+/*   Updated: 2024/10/15 11:23:01 by pau              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void	continue_err(char **ag, int err_type, char *param, int err)
 	else if (err_type == NOT_DIR)
 		ft_putstr_fd("minishell: Not a directory: ", 2);
 	else if (err_type == NOT_VAL_IDENT)
-		ft_putstr_fd("minishell: not a valid identifier\n",2);
+		ft_putstr_fd("minishell: not a valid identifier\n", 2);
 	else if (err_type == INV_OPTION)
 		ft_putstr_fd("minishell: invalid option\n", 2);
 	else if (err_type == MANY_ARG)
@@ -135,18 +135,4 @@ void	cd_error(char **str[2])
 		mini_perror(str[0], NOT_DIR, NULL, 1);
 	if (str[0][1] && dir)
 		closedir(dir);
-}
-
-void	free_content(void *content)
-{
-	t_mini	*node;
-
-	node = content;
-	ft_free_matrix(&node->full_cmd);
-	free(node->full_path);
-	if (node->infile != STDIN_FILENO)
-		close(node->infile);
-	if (node->outfile != STDOUT_FILENO)
-		close(node->outfile);
-	free(node);
 }

@@ -6,7 +6,7 @@
 /*   By: pau <pau@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 23:51:04 by pau               #+#    #+#             */
-/*   Updated: 2024/10/14 23:51:14 by pau              ###   ########.fr       */
+/*   Updated: 2024/10/15 11:23:56 by pau              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,28 +104,4 @@ void	exec_fork(t_prompt *prompt, t_list *cmd, int fd[2])
 	}
 	else if (!pid)
 		child_process(prompt, cmd, fd);
-}
-
-void	*check_to_fork(t_prompt *prompt, t_list *cmd, int fd[2])
-{
-	t_mini	*mini;
-	DIR		*dir;
-
-	mini = cmd->content;
-	dir = NULL;
-	if (mini->full_cmd)
-		dir = opendir(*mini->full_cmd);
-	if (mini->infile == -1 || mini->outfile == -1)
-		return (NULL);
-	if ((mini->full_path && access(mini->full_path, X_OK) == 0)
-		|| is_builtin(mini))
-		exec_fork(prompt, cmd, fd);
-	else if (!is_builtin(mini) && ((mini->full_path && \
-			!access(mini->full_path, F_OK)) || dir))
-		g_status = 126;
-	else if (!is_builtin(mini) && mini->full_cmd)
-		g_status = 127;
-	if (dir)
-		closedir(dir);
-	return ("");
 }

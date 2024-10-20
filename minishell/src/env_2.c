@@ -6,7 +6,7 @@
 /*   By: pau <pau@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 00:30:18 by pau               #+#    #+#             */
-/*   Updated: 2024/10/15 00:32:04 by pau              ###   ########.fr       */
+/*   Updated: 2024/10/20 21:55:16 by pau              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,5 +120,4 @@ char	**ft_comprobar_prompt(t_prompt *prompt)
 	if (!ft_strncmp(((t_mini *)puntero->content)->full_cmd[0], "export", 6))
 		return (((t_mini *)puntero->content)->full_cmd);
 	return (NULL);
-
 }

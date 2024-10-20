@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   ft_sqrt.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jpajuelo <jpajuelo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pau <pau@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/24 09:11:17 by jpajuelo          #+#    #+#             */
-/*   Updated: 2024/08/21 14:23:59 by jpajuelo         ###   ########.fr       */
+/*   Updated: 2024/10/20 21:56:53 by pau              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
+
 int	ft_sqrt(int nb)
 {
 	int	i;
